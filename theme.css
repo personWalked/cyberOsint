@@ -1,0 +1,101 @@
+/* Подключается ПОСЛЕ style.css и extras.css: хакерская тема, мониторы в тёмной комнате */
+:root {
+    --bg-dark: #000;
+    --monitor-bg: #010b03;
+    --border-color: #0c7a28;
+    --blue-glow: #00ff41;
+    --blue-bright: #8bff9f;
+    --text-dim: #3fae5a;
+    --red: #ff3b3b;
+    --green: #00ff41;
+    --yellow: #d7ff3b;
+}
+* { font-family: 'Courier New', Consolas, monospace; }
+
+/* тёмная комната: свет идёт только от экранов */
+body {
+    background: radial-gradient(ellipse at 50% 40%, #052410 0%, #010804 42%, #000 78%);
+    color: var(--green);
+}
+body::before {
+    content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 50;
+    background: radial-gradient(ellipse at center, transparent 45%, rgba(0, 0, 0, 0.88) 100%);
+}
+.workspace { position: relative; padding-bottom: 56px; }
+.workspace::after { /* стол */
+    content: ''; position: absolute; left: 2%; right: 2%; bottom: 0; height: 36px;
+    background: linear-gradient(#0d110e, #020302);
+    border-top: 1px solid #1d2a21; border-radius: 8px 8px 0 0;
+    box-shadow: 0 -12px 60px rgba(0, 255, 65, 0.14);
+}
+
+/* монитор: рамка, свечение, сканлайны, мерцание */
+.monitor {
+    position: relative;
+    border: 12px solid #0b0d0c; border-radius: 16px;
+    background: var(--monitor-bg);
+    box-shadow: 0 0 0 2px #1d2420, 0 0 70px rgba(0, 255, 65, 0.22), inset 0 0 50px rgba(0, 255, 65, 0.1);
+    text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+    animation: flicker 4s infinite;
+}
+.monitor::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 5;
+    background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.22) 0 1px, transparent 1px 3px);
+}
+@keyframes flicker { 0%, 100% { opacity: 1; } 47% { opacity: 0.97; } 50% { opacity: 0.9; } 53% { opacity: 0.98; } }
+
+.monitor-header { background: #000; color: var(--green); }
+.monitor-title, .window-title { color: var(--green); letter-spacing: 1px; }
+.monitor-title::before, .window-title::before { content: '> '; }
+.window { background: rgba(0, 20, 5, 0.6); border-color: var(--border-color); }
+.window-title { background: rgba(0, 255, 65, 0.08); }
+
+.cyber-btn { background: transparent; color: var(--green); border: 1px solid var(--green); text-shadow: none; }
+.cyber-btn:hover:not(:disabled) { background: var(--green); color: #000; box-shadow: 0 0 12px var(--green); }
+.cyber-btn.warning { color: var(--red); border-color: var(--red); }
+.cyber-btn.warning:hover:not(:disabled) { background: var(--red); color: #000; box-shadow: 0 0 12px var(--red); }
+.cyber-btn.special { color: var(--yellow); border-color: var(--yellow); }
+.cyber-btn.special:hover:not(:disabled) { background: var(--yellow); color: #000; box-shadow: 0 0 12px var(--yellow); }
+.cyber-btn.primary { background: rgba(0, 255, 65, 0.12); }
+
+.cyber-input { background: #000; color: var(--green); border-color: var(--border-color); caret-color: var(--green); }
+.cyber-input:focus { outline: none; box-shadow: 0 0 8px rgba(0, 255, 65, 0.5); }
+.output-box, .chat-messages { background: #000; border-color: var(--border-color); color: var(--green); }
+.tab-btn, .cat-btn { background: transparent; border: 1px solid var(--border-color); color: var(--text-dim); padding: 4px 8px; cursor: pointer; font-size: 0.72rem; border-radius: 3px; }
+.tab-btn.active, .cat-btn.active { background: var(--green); color: #000; font-weight: bold; text-shadow: none; }
+.contract-card { background: rgba(0, 25, 8, 0.9); }
+.shop-item { background: rgba(0, 20, 5, 0.8); border-color: var(--border-color); gap: 8px; }
+.shop-item em { color: var(--yellow); font-style: normal; }
+.top-stats strong { color: var(--yellow); }
+#cat-filter { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 6px; }
+.dossier { background: #000; border: 1px dashed var(--border-color); padding: 6px; margin: 4px 0; white-space: pre-wrap; color: var(--blue-bright); }
+.chat-actions .cyber-input { flex: 1; }
+.chat-messages { height: auto; max-height: 190px; }
+
+/* мини-игра 1: сетка */
+.grid-dynamic { background: rgba(0, 255, 65, 0.04); border-color: var(--green); }
+.cell { background: rgba(0, 255, 65, 0.05); border: 1px solid rgba(0, 255, 65, 0.18); font-size: 1.15rem; color: var(--text-dim); }
+.cell:hover { background: rgba(0, 255, 65, 0.22); }
+.cell.player { color: var(--green); text-shadow: 0 0 10px var(--green); font-weight: bold; }
+.cell.virus { color: var(--red); text-shadow: 0 0 8px var(--red); }
+.cell.server { color: var(--yellow); text-shadow: 0 0 10px var(--yellow); font-weight: bold; }
+.cell.wall { background: #04140a; color: #0a4d1c; }
+
+/* мини-игра 2: brute-force */
+.brute { width: 400px; display: flex; flex-direction: column; gap: 8px; }
+.brute-log { height: 330px; font-size: 0.85rem; letter-spacing: 2px; }
+.brute .row .cyber-input { flex: 1; letter-spacing: 6px; text-align: center; }
+
+/* boot-экран */
+#boot { position: fixed; inset: 0; z-index: 999; background: #000; color: var(--green); padding: 8vh 8vw; white-space: pre; font-size: 1rem; transition: opacity 0.7s; cursor: pointer; }
+#boot.off { opacity: 0; pointer-events: none; }
+.modal { z-index: 300; }
+.modal-content { box-shadow: 0 0 30px rgba(0, 255, 65, 0.35); }
+
+/* мини-игра 3: GEOINT */
+.geo { width: 100%; display: flex; flex-direction: column; gap: 6px; }
+#geo-canvas { width: 100%; border: 1px solid var(--border-color); cursor: crosshair; background: #000; }
+.geo-clues { list-style: none; font-size: 0.8rem; color: var(--blue-bright); }
+.geo-clues li::before { content: '\25B8 '; color: var(--yellow); }
+.geo .output-box { height: auto; min-height: 34px; }
+.top-stats .cyber-btn { padding: 2px 6px; font-size: 0.65rem; }

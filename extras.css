@@ -1,0 +1,13 @@
+/* Подключается ПОСЛЕ style.css */
+.hidden { display: none !important; }              /* раньше chat-box не скрывался */
+input, select { user-select: text; }                /* можно копировать/вставлять IP */
+.osint-tabs { flex-wrap: wrap; }
+.cyber-input { width: 100%; }
+select.cyber-input { cursor: pointer; }
+.output-box.tall { height: 130px; }
+.row { display: flex; gap: 8px; }
+.contract-card.locked { opacity: 0.55; }
+.cell { font-size: 1rem; }
+.cell.hint { background: rgba(255, 183, 3, 0.35); border-color: var(--yellow); }
+.cell.empty { cursor: pointer; }
+#modal-msg { white-space: pre-line; }

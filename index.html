@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberOSINT Simulator v9</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="extras.css">
+    <link rel="stylesheet" href="theme.css">
+</head>
+<body>
+    <div class="workspace" id="workspace">
+        <div class="monitor main-monitor">
+            <div class="monitor-header">
+                <span class="monitor-title">DISPLAY 01 // MAIN_TERMINAL_OS</span>
+                <div class="top-stats">
+                    <span>CREDITS: <strong id="stat-credits">$1300</strong></span>
+                    <button id="btn-sound" class="cyber-btn">SOUND</button>
+                    <button id="btn-reset" class="cyber-btn warning">RESET</button>
+                    <span>RANK: <strong id="stat-rank">-</strong></span>
+                    <span>REP: <strong id="stat-rep">10</strong></span>
+                </div>
+            </div>
+            <div class="desktop-grid">
+                <div class="window" id="app-chat">
+                    <div class="window-title">SECURE_ENCRYPTED_MESSENGER (<span id="contract-count">0</span> contracts active)</div>
+                    <div class="window-body">
+                        <div id="cat-filter"></div>
+                        <div id="contracts-list" class="contracts-list"></div>
+                        <div id="chat-box" class="chat-box hidden">
+                            <div id="chat-messages" class="chat-messages"></div>
+                            <div class="chat-actions" id="chat-actions"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="window" id="app-osint">
+                    <div class="window-title">OSINT_RECON_SUITE & TACTICAL INTEL</div>
+                    <div class="window-body">
+                        <div class="osint-tabs">
+                            <button class="tab-btn active" data-tab="whois">WHOIS</button>
+                            <button class="tab-btn" data-tab="nmap">NMAP</button>
+                            <button class="tab-btn" data-tab="soc">SOCMINT</button>
+                            <button class="tab-btn" data-tab="decoder">DECODER</button>
+                            <button class="tab-btn" data-tab="cases">CASES</button>
+                            <button class="tab-btn" data-tab="hints">AI HINTS</button>
+                        </div>
+                        <div class="tab-content active" id="tab-whois">
+                            <input type="text" id="whois-input" placeholder="Enter target IP (e.g., 192.168.1.50)..." class="cyber-input">
+                            <button id="btn-whois" class="cyber-btn">QUERY REGISTRY</button>
+                            <div id="whois-output" class="output-box">Input contract IP to extract ownership and registry data...</div>
+                        </div>
+                        <div class="tab-content" id="tab-nmap">
+                            <input type="text" id="nmap-input" placeholder="Enter target IP for vulnerability scan..." class="cyber-input">
+                            <button id="btn-nmap" class="cyber-btn">RUN PORT SCAN</button>
+                            <div id="nmap-output" class="output-box">MANDATORY: Scan target ports to authorize infiltration...</div>
+                        </div>
+                        <div class="tab-content" id="tab-soc">
+                            <input type="text" id="soc-input" placeholder="Username or email (e.g., zero_cool)..." class="cyber-input">
+                            <button id="btn-soc" class="cyber-btn">SEARCH PUBLIC PROFILES</button>
+                            <div id="soc-output" class="output-box">Passive social-media intelligence. Public data only.</div>
+                        </div>
+                        <div class="tab-content" id="tab-decoder">
+                            <select id="dec-op" class="cyber-input">
+                                <option value="base64">Base64</option>
+                                <option value="rot13">ROT13</option>
+                                <option value="hex">Hex</option>
+                                <option value="reverse">Reverse</option>
+                            </select>
+                            <input type="text" id="dec-input" placeholder="Paste encoded text..." class="cyber-input">
+                            <button id="btn-decode" class="cyber-btn">DECODE</button>
+                            <div id="dec-output" class="output-box">Output...</div>
+                        </div>
+                        <div class="tab-content" id="tab-cases">
+                            <select id="case-select" class="cyber-input"></select>
+                            <div id="case-info" class="output-box tall"></div>
+                            <input type="text" id="case-answer" placeholder="Your answer..." class="cyber-input">
+                            <div class="row">
+                                <button id="btn-case-submit" class="cyber-btn">SUBMIT</button>
+                                <button id="btn-case-hint" class="cyber-btn special">HINT ($50)</button>
+                            </div>
+                            <div id="case-feedback" class="output-box"></div>
+                        </div>
+                        <div class="tab-content" id="tab-hints">
+                            <button id="btn-get-hint" class="cyber-btn special">ANALYZE ROUTE VECTOR ($50)</button>
+                            <div id="hints-output" class="output-box">Works only during an active infiltration. Highlights the next 4 steps.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="window" id="app-log">
+                    <div class="window-title">SYSTEM_LOG</div>
+                    <div class="window-body"><div id="sys-log" class="output-box tall"></div></div>
+                </div>
+
+                <div class="window" id="app-shop">
+                    <div class="window-title">BLACK_MARKET_HARDWARE</div>
+                    <div class="window-body shop-body">
+                        <div class="shop-item">
+                            <span>Dual Monitor Setup (Required for Infiltration) [$1000]</span>
+                            <button id="buy-monitor" class="cyber-btn">BUY</button>
+                        </div>
+                        <div class="shop-item">
+                            <span>CPU Overclock (+5 Moves per hack, stackable) [$300]</span>
+                            <button id="buy-cpu" class="cyber-btn">BUY</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="monitor second-monitor hidden" id="second-monitor">
+            <div class="monitor-header">
+                <span class="monitor-title">DISPLAY 02 // TACTICAL_GRID_TERMINAL</span>
+                <div class="top-stats">
+                    <span>MOVES: <strong id="grid-moves">20</strong></span>
+                    <span>TARGET: <strong id="grid-target-name">NONE</strong></span>
+                </div>
+            </div>
+            <div class="monitor-body grid-container">
+                <div id="grid-board" class="grid-dynamic"></div>
+                <div id="geo-panel" class="geo hidden">
+                    <canvas id="geo-canvas" width="580" height="290"></canvas>
+                    <ul id="geo-clues" class="geo-clues"></ul>
+                    <div id="geo-status" class="output-box"></div>
+                    <div class="row">
+                        <button id="btn-geo-clue" class="cyber-btn special">DEEPER ANALYSIS ($40)</button>
+                        <button id="btn-geo-submit" class="cyber-btn">SUBMIT PIN</button>
+                    </div>
+                </div>
+                <div id="brute-panel" class="brute hidden">
+                    <div id="brute-log" class="output-box brute-log"></div>
+                    <div class="row">
+                        <input type="text" id="brute-input" class="cyber-input" placeholder="code">
+                        <button id="btn-brute" class="cyber-btn">TRY</button>
+                        <button id="btn-keylog" class="cyber-btn special">KEYLOGGER</button>
+                    </div>
+                </div>
+                <div class="grid-controls">
+                    <button id="btn-emp" class="cyber-btn special">EMP</button>
+                    <button id="btn-abort-hack" class="cyber-btn warning">ABORT CONNECTION</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <h2 id="modal-title">MISSION STATUS</h2>
+            <p id="modal-msg">Contract successfully fulfilled!</p>
+            <button id="modal-btn" class="cyber-btn primary">ACKNOWLEDGE</button>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+    <script src="extra.js"></script>
+    <script src="geo.js"></script>
+</body>
+</html>
